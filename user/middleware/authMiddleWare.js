@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/user.model');
-const blacklisttokenModel = require('../models/blacklisttoken.model');
+const userModel = require('../models/userModel');
+const blacklisttokenModel = require('../models/blackListModel');
+require('dotenv').config();
 
 
 const auth = async (req, res, next) => {
