@@ -79,9 +79,21 @@ router.get('/logout', async (req, res) => {
 router.get('/profile', auth , async (req, res) => {
     try {
         captain = req.captain;
-        // delete captain.password;
+        delete captain._doc.password;
         res.send(captain);
     } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/availibility', auth , async (req, res) => {
+    try {
+        const captain = await Captain.findById(req.captain._id);
+        captain.isAvailable = !captain.isAvailable;
+        await captain.save();
+        res.send(captain.isAvailable);
+    } catch (error) {
+
         res.status(500).json({ message: error.message });
     }
 });

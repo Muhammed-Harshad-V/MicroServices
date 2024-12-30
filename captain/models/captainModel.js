@@ -14,6 +14,10 @@ const captainSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isAvailable: {
+        type: Boolean,
+        default: false
+    },
 });
 
 module.exports = mongoose.model('captain', captainSchema);

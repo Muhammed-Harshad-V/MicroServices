@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/captainModel');
+const captainModel = require('../models/captainModel');
 const blacklisttokenModel = require('../models/blackListModel');
 require('dotenv').config();
 
@@ -20,13 +20,13 @@ const auth = async (req, res, next) => {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const user = await userModel.findById(decoded.id);
+        const captain = await captainModel.findById(decoded.id);
 
-        if (!user) {
+        if (!captain) {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        req.user = user;
+        req.captain = captain;
 
         next();
     } catch (error) {
